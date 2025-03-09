@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Paiement Réussi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .container img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .container h2 {
+            color: #28a745;
+            margin: 0;
+        }
+
+        .container p {
+            margin: 15px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .btn-home {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .btn-home:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img th:src="@{/images/success.jpg}" alt="Commande validée">
+    <h2>Commande Validée !</h2>
+    <p>Merci pour votre commande.</p>
+    <p>Livraison estimée dans <strong>45 minutes</strong>.</p>
+    <p>Paiement sur place : <strong>Carte ou Espèces</strong>.</p>
+
+    <a href="/" class="btn-home">Retour à l'accueil</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <th:block th:replace="fragments/_head.html::head"></th:block>
+</head>
+
+<body>
+
+  <div class="hero_area">
+    <div class="bg-box">
+      <img th:src="@{/images/hero-bg.jpg}" alt="">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section">
+      <th:block th:replace="fragments/_header.html::header"></th:block>
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class="slider_section ">
+      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Fast Food Restaurant
+                    </h1>
+                    <p>
+                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    </p>
+                    <!--<div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Commerces à proximité
+                    </h1>
+                    <p>
+                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    </p>
+                    <!--<div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Gastronomie
+                    </h1>
+                    <p>
+                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    </p>
+                    <!--<div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <ol class="carousel-indicators">
+            <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+            <li data-target="#customCarousel1" data-slide-to="1"></li>
+            <li data-target="#customCarousel1" data-slide-to="2"></li>
+          </ol>
+        </div>
+      </div>
+
+    </section>
+    <!-- end slider section -->
+  </div>
+
+  <!-- food section -->
+
+  <section class="food_section layout_padding-bottom">
+    <div class="container">
+
+      <div class="heading-container text-center mb-4">
+        <form method="get" action="/searchByLocation" class="d-flex justify-content-center">
+          <input type="text" name="location" class="form-control w-50 me-2" placeholder="Recherchez par ville, pays, code postal..." required>
+          <button type="submit" class="btn btn-primary">🔍 Rechercher</button>
+        </form>
+      </div>
+
+      <div class="heading_container heading_center">
+        <br/>
+        <h2>Une envie subite ? Régalez-vous de suite.</h2>
+      </div>
+
+      <div class="row">
+        <div th:each="restaurant : ${restaurants}" class="col-sm-6 col-lg-4">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img th:src="@{/images/res.jpg}" style="width:400em; " alt="Restaurant Image">
+              </div>
+              <div class="detail-box">
+                <h5 th:text="${restaurant.restaurantName}" th:href="@{/detail}">Restaurant Name</h5>
+                  <p th:text="${restaurant.address.city + ', ' + restaurant.address.country}">
+                    City, Country
+                  </p>
+                  <p>  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                  </svg> 4.0</p>
+                <div class="btn-box">
+                  <a th:href="@{'/restaurants/' + ${restaurant.restaurantId}}">View Details</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-box">
+        <a href="/menu">Voir tout</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- end food section -->
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <th:block th:replace="fragments/_footer.html::footer"></th:block>
+  </footer>
+  <!-- footer section -->
+
+  <th:block th:replace="fragments/_js.html::js"></th:block>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+        window.location.href = "/login";
+    }
+});
+</script>
+
+</body>
+
+</html>
